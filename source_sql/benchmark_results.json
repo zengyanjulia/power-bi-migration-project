@@ -1,0 +1,50 @@
+{
+  "engine": "SQLite 3.53.1",
+  "python": "3.12.14",
+  "rows": 288000,
+  "median_runs": 9,
+  "warmups": 2,
+  "mandate": 7,
+  "month": "2026-09",
+  "groups": 30,
+  "positions": 6000,
+  "equal": true,
+  "before": {
+    "median_ms": 11.758,
+    "runs_ms": [
+      12.097,
+      10.191,
+      11.04,
+      11.73,
+      11.283,
+      11.758,
+      11.892,
+      11.893,
+      14.93
+    ],
+    "plan": [
+      "SCAN holdings",
+      "USE TEMP B-TREE FOR GROUP BY"
+    ]
+  },
+  "after": {
+    "median_ms": 0.665,
+    "runs_ms": [
+      0.667,
+      0.579,
+      0.749,
+      0.553,
+      0.709,
+      0.583,
+      0.738,
+      0.575,
+      0.665
+    ],
+    "plan": [
+      "SEARCH holdings USING INDEX ix_holdings_mandate_date (mandate_id=? AND valuation_date>? AND valuation_date<?)"
+    ]
+  },
+  "improvement": 94.3,
+  "sql_before": "SELECT valuation_date, COUNT(*) AS positions, SUM(value_cents) AS total_cents\nFROM holdings WHERE mandate_id = ? AND date(valuation_date) >= date(?) AND date(valuation_date) < date(?)\nGROUP BY valuation_date ORDER BY valuation_date",
+  "sql_after": "SELECT valuation_date, COUNT(*) AS positions, SUM(value_cents) AS total_cents\nFROM holdings WHERE mandate_id = ? AND valuation_date >= ? AND valuation_date < ?\nGROUP BY valuation_date ORDER BY valuation_date"
+}

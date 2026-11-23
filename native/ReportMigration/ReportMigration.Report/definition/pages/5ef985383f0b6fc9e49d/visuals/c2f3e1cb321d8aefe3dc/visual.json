@@ -1,0 +1,158 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "c2f3e1cb321d8aefe3dc",
+  "position": {
+    "x": 24,
+    "y": 650,
+    "width": 1452,
+    "height": 185,
+    "z": 3,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Valuation Test"
+                    }
+                  },
+                  "Property": "Position"
+                }
+              },
+              "queryRef": "Valuation Test.Position",
+              "nativeQueryRef": "Position"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Valuation Test"
+                    }
+                  },
+                  "Property": "Legacy USD"
+                }
+              },
+              "queryRef": "Valuation Test.Legacy USD",
+              "nativeQueryRef": "Legacy USD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Valuation Test"
+                    }
+                  },
+                  "Property": "Original target USD"
+                }
+              },
+              "queryRef": "Valuation Test.Original target USD",
+              "nativeQueryRef": "Original target USD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Valuation Test"
+                    }
+                  },
+                  "Property": "FX variance USD"
+                }
+              },
+              "queryRef": "Valuation Test.FX variance USD",
+              "nativeQueryRef": "FX variance USD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Valuation Test"
+                    }
+                  },
+                  "Property": "Retest USD"
+                }
+              },
+              "queryRef": "Valuation Test.Retest USD",
+              "nativeQueryRef": "Retest USD"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Valuation comparison · Portfolio Appraisal test fixture'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2F3025'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFEF9'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

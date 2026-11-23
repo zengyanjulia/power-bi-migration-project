@@ -1,0 +1,679 @@
+{
+  "name": "ReportMigration",
+  "compatibilityLevel": 1601,
+  "model": {
+    "culture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Portfolio",
+        "columns": [
+          {
+            "name": "Jira Key",
+            "dataType": "string",
+            "sourceColumn": "Jira Key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Report or Epic",
+            "dataType": "string",
+            "sourceColumn": "Report or Epic",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Assignee",
+            "dataType": "string",
+            "sourceColumn": "Assignee",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Phase",
+            "dataType": "string",
+            "sourceColumn": "Phase",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Health",
+            "dataType": "string",
+            "sourceColumn": "Health",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Next Milestone",
+            "dataType": "string",
+            "sourceColumn": "Next Milestone",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Baseline",
+            "dataType": "string",
+            "sourceColumn": "Baseline",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Forecast",
+            "dataType": "string",
+            "sourceColumn": "Forecast",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Audience",
+            "dataType": "string",
+            "sourceColumn": "Audience",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Business Owner",
+            "dataType": "string",
+            "sourceColumn": "Business Owner",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Source Platform",
+            "dataType": "string",
+            "sourceColumn": "Source Platform",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Acceptance Test",
+            "dataType": "string",
+            "sourceColumn": "Acceptance Test",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Wave",
+            "dataType": "string",
+            "sourceColumn": "Wave",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Phase Order",
+            "dataType": "int64",
+            "sourceColumn": "Phase Order",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Drift Days",
+            "dataType": "int64",
+            "sourceColumn": "Drift Days",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Target format",
+            "dataType": "string",
+            "sourceColumn": "Target format",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SQL Server dataset command",
+            "dataType": "string",
+            "sourceColumn": "SQL Server dataset command",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Upstream SSIS package",
+            "dataType": "string",
+            "sourceColumn": "Upstream SSIS package",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SSIS transformation",
+            "dataType": "string",
+            "sourceColumn": "SSIS transformation",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Delivery rationale",
+            "dataType": "string",
+            "sourceColumn": "Delivery rationale",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Format acceptance",
+            "dataType": "string",
+            "sourceColumn": "Format acceptance",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Portfolio",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "  Source = #table(type table [#\"Jira Key\" = type text, #\"Report or Epic\" = type text, #\"Assignee\" = type text, #\"Phase\" = type text, #\"Health\" = type text, #\"Next Milestone\" = type text, #\"Baseline\" = type text, #\"Forecast\" = type text, #\"Audience\" = type text, #\"Business Owner\" = type text, #\"Source Platform\" = type text, #\"Acceptance Test\" = type text, #\"Wave\" = type text, #\"Phase Order\" = Int64.Type, #\"Drift Days\" = Int64.Type, #\"Target format\" = type text, #\"SQL Server dataset command\" = type text, #\"Upstream SSIS package\" = type text, #\"SSIS transformation\" = type text, #\"Delivery rationale\" = type text, #\"Format acceptance\" = type text], {",
+                "    {\"MIG-101\", \"Portfolio Appraisal\", \"N. Ellis\", \"Reconcile\", \"At risk\", \"Valuation sign-off\", \"2026-11-20\", \"2026-11-24\", \"Client Reporting\", \"Institutional client service\", \"SSRS\", \"Tie USD value by mandate, security and valuation date. Check the FX rate date.\", \"Wave 1\", 4, 4, \"Both\", \"usp_PortfolioAppraisal(@MandateId, @AsOfDate)\", \"LoadClosingFX.dtsx\", \"Loads the approved valuation-date FX rate into the reporting mart.\", \"Publish a client PDF and give Operations a security-level view of valuation differences.\", \"Tie both outputs by mandate, security and date. Check client pagination and header totals.\"},",
+                "    {\"MIG-102\", \"Realized Gains and Losses Statement\", \"M. Park\", \"UAT\", \"On track\", \"Client scope approval\", \"2026-11-24\", \"2026-11-24\", \"Client Reporting\", \"Investment accounting\", \"SSRS\", \"Match disposal and tax-lot keys, cost basis and proceeds for the same sales.\", \"Wave 1\", 5, 0, \"Paginated\", \"usp_RealizedGains(@AccountId, @FromDate, @ToDate)\", \"LoadTaxLots.dtsx\", \"Loads lot-relief records used to calculate realized gains and losses.\", \"Keep the fixed-format statement with one section per account and tax lot.\", \"Match each disposal, proceeds and cost basis. Verify account filters, repeated headers and PDF page totals.\"},",
+                "    {\"MIG-103\", \"Quarterly Portfolio Review\", \"R. Lane\", \"Cutover\", \"On track\", \"Production cutover\", \"2026-11-25\", \"2026-11-25\", \"Client Reporting\", \"Institutional client service\", \"SSRS\", \"Align reporting period, benchmark version and gross or net return convention.\", \"Wave 1\", 6, 0, \"Both\", \"usp_QuarterlyReview(@MandateId, @QuarterEnd)\", \"LoadBenchmarks.dtsx\", \"Aligns portfolio and benchmark periods before the quarterly close.\", \"Use an interactive investment review and a paginated quarterly client pack.\", \"Compare gross and net returns for the same period and benchmark across both outputs.\"},",
+                "    {\"MIG-104\", \"Performance Attribution\", \"A. Chen\", \"Model\", \"On track\", \"Model review\", \"2026-11-26\", \"2026-11-26\", \"Client Reporting\", \"Portfolio managers\", \"SSRS\", \"Reconcile the sum of effects and any disclosed residual to the active return.\", \"Wave 2\", 3, 0, \"Interactive\", \"T-SQL query of rpt.vw_AttributionDaily\", \"LoadAttributionInputs.dtsx\", \"Loads portfolio and benchmark weights at security and date grain.\", \"Let analysts compare allocation and selection effects by sector.\", \"Reconcile contribution totals and sector subtotals for a fixed period.\"},",
+                "    {\"MIG-105\", \"AUM Rollforward & Net Flows\", \"S. Reed\", \"Discover\", \"At risk\", \"Benchmark mapping\", \"2026-11-23\", \"2026-11-25\", \"Internal Management\", \"FP&A and executive management\", \"SSRS\", \"Bridge opening to closing AUM using net flows, market, FX and any other adjustments.\", \"Wave 2\", 2, 2, \"Interactive\", \"T-SQL query of rpt.vw_AUMBridge\", \"ClassifyMandateFlows.dtsx\", \"Classifies client flows separately from market and currency movements.\", \"Explain changes in assets under management by mandate and driver.\", \"Tie opening AUM plus flows, market, FX and other changes to closing AUM.\"},",
+                "    {\"MIG-106\", \"Management Fee Revenue & Billing Reconciliation\", \"P. Noor\", \"Reconcile\", \"Blocked\", \"Source extract approval\", \"2026-11-23\", \"2026-11-27\", \"Internal Finance\", \"Revenue accounting\", \"SSRS\", \"Apply fee tiers and effective dates, then reconcile accruals to the ledger and invoices.\", \"Wave 2\", 4, 4, \"Paginated\", \"usp_FeeBillingReconciliation(@BillingPeriod)\", \"LoadFeesAndInvoices.dtsx\", \"Stages effective-dated fee schedules and posted invoices.\", \"Produce a controlled month-end reconciliation with invoice-level detail.\", \"Tie invoice totals to the fee ledger and compare billing-period PDF subtotals.\"},",
+                "    {\"MIG-107\", \"Daily Cash & Position Reconciliation\", \"G. Silva\", \"Inventory\", \"On track\", \"Scope sign-off\", \"2026-11-27\", \"2026-11-27\", \"Internal Operations\", \"Investment operations\", \"SSRS\", \"Tie cash by account and currency, and quantities by account and security. Test unmatched rows.\", \"Wave 3\", 1, 0, \"Interactive\", \"T-SQL query of rpt.vw_CustodyBreaks\", \"LoadCustodianPositions.dtsx\", \"Normalizes custodian account and security identifiers before matching positions.\", \"Let Operations filter breaks by account, currency, security and age.\", \"Match open-break counts and amounts by account and currency.\"},",
+                "    {\"MIG-108\", \"Daily Failed Trades Report\", \"A. Chen\", \"UAT\", \"On track\", \"Security retest\", \"2026-11-24\", \"2026-11-24\", \"Internal Operations\", \"Trade support\", \"SSRS\", \"Match trade IDs and expected settlement dates. Verify open-only filters and business-day aging.\", \"Wave 1\", 5, 0, \"Paginated\", \"usp_FailedTrades(@SettlementDate)\", \"LoadSettlementStatus.dtsx\", \"Brings in the latest custody confirmation for each settlement obligation.\", \"Deliver a dated exception list to the settlements desk.\", \"Tie trade IDs and failed amounts to the same cut-off and test the empty-report case.\"},",
+                "    {\"MIG-109\", \"Operating Expenses — Budget vs. Actual\", \"A. Chen\", \"Discover\", \"On track\", \"Owner review\", \"2026-11-26\", \"2026-11-26\", \"Internal Finance\", \"Corporate FP&A\", \"SSRS\", \"Match fiscal period, cost center and approved budget version to the general ledger.\", \"Wave 3\", 2, 0, \"Interactive\", \"T-SQL query of rpt.vw_ExpenseVariance\", \"LoadGLAndBudget.dtsx\", \"Loads the approved budget version and ledger postings by cost centre.\", \"Explore expense variances by account, cost centre and period.\", \"Compare actuals and budget versions by cost centre and month.\"},",
+                "    {\"MIG-110\", \"Investment Guideline Breach Monitor\", \"G. Silva\", \"UAT\", \"On track\", \"Owner review\", \"2026-11-26\", \"2026-11-26\", \"Internal Risk\", \"Investment compliance\", \"SSRS\", \"Test a position at the limit and above it. Verify effective dates, waivers and access by mandate.\", \"Wave 3\", 5, 0, \"Interactive\", \"usp_MandateBreaches(@AsOfDate)\", \"EvaluateGuidelineLimits.dtsx\", \"Applies mandate-specific thresholds and effective waiver dates.\", \"Let Compliance inspect active exceptions by mandate and rule.\", \"Reconcile active and waived breaches at the same as-of date.\"}",
+                "  })",
+                "in",
+                "  Source"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Active epics",
+            "expression": "DISTINCTCOUNT(Portfolio[Jira Key])",
+            "formatString": "0"
+          },
+          {
+            "name": "At risk",
+            "expression": "CALCULATE([Active epics],Portfolio[Health]=\"At risk\")",
+            "formatString": "0"
+          },
+          {
+            "name": "Blocked",
+            "expression": "CALCULATE([Active epics],Portfolio[Health]=\"Blocked\")",
+            "formatString": "0"
+          },
+          {
+            "name": "Done SP",
+            "expression": "COALESCE(CALCULATE(SUM(Items[Story Points]),Items[Status]=\"Done\",Items[Item Type]<>\"Subtask\"),0)",
+            "formatString": "0"
+          },
+          {
+            "name": "Total SP",
+            "expression": "SUMX(FILTER(Items,Items[Item Type]<>\"Subtask\"),Items[Story Points])",
+            "formatString": "0"
+          },
+          {
+            "name": "Completion",
+            "expression": "DIVIDE([Done SP],[Total SP])",
+            "formatString": "0%"
+          },
+          {
+            "name": "Unestimated",
+            "expression": "COALESCE(COUNTROWS(FILTER(Items,Items[Item Type]<>\"Subtask\" && ISBLANK(Items[Story Points]))),0)",
+            "formatString": "0"
+          }
+        ]
+      },
+      {
+        "name": "Items",
+        "columns": [
+          {
+            "name": "Epic Key",
+            "dataType": "string",
+            "sourceColumn": "Epic Key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Issue Key",
+            "dataType": "string",
+            "sourceColumn": "Issue Key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Parent Key",
+            "dataType": "string",
+            "sourceColumn": "Parent Key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Item Type",
+            "dataType": "string",
+            "sourceColumn": "Item Type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Summary",
+            "dataType": "string",
+            "sourceColumn": "Summary",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Owner",
+            "dataType": "string",
+            "sourceColumn": "Owner",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Open Risk",
+            "dataType": "string",
+            "sourceColumn": "Open Risk",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Open Blocker",
+            "dataType": "string",
+            "sourceColumn": "Open Blocker",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Next Action",
+            "dataType": "string",
+            "sourceColumn": "Next Action",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Action Owner",
+            "dataType": "string",
+            "sourceColumn": "Action Owner",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Story Points",
+            "dataType": "int64",
+            "sourceColumn": "Story Points",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Start Day",
+            "dataType": "int64",
+            "sourceColumn": "Start Day",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "End Day",
+            "dataType": "int64",
+            "sourceColumn": "End Day",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Blocker Age Days",
+            "dataType": "int64",
+            "sourceColumn": "Blocker Age Days",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Action Due Day",
+            "dataType": "int64",
+            "sourceColumn": "Action Due Day",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Target Start Date",
+            "sourceColumn": "Target Start Date",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "formatString": "mmm d, yyyy"
+          },
+          {
+            "name": "Target End Date",
+            "sourceColumn": "Target End Date",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "formatString": "mmm d, yyyy"
+          },
+          {
+            "name": "Actual Start Date",
+            "sourceColumn": "Actual Start Date",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "formatString": "mmm d, yyyy"
+          },
+          {
+            "name": "Actual End Date",
+            "sourceColumn": "Actual End Date",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "formatString": "mmm d, yyyy"
+          },
+          {
+            "name": "Potential Issue",
+            "sourceColumn": "Potential Issue",
+            "dataType": "string",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Schedule item",
+            "sourceColumn": "Schedule item",
+            "dataType": "string",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Items",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "  Source = #table(type table [#\"Epic Key\" = type text, #\"Issue Key\" = type text, #\"Parent Key\" = type text, #\"Item Type\" = type text, #\"Summary\" = type text, #\"Owner\" = type text, #\"Status\" = type text, #\"Open Risk\" = type text, #\"Open Blocker\" = type text, #\"Next Action\" = type text, #\"Action Owner\" = type text, #\"Story Points\" = Int64.Type, #\"Start Day\" = Int64.Type, #\"End Day\" = Int64.Type, #\"Blocker Age Days\" = Int64.Type, #\"Action Due Day\" = Int64.Type, #\"Target Start Date\" = type nullable datetime, #\"Target End Date\" = type nullable datetime, #\"Actual Start Date\" = type nullable datetime, #\"Actual End Date\" = type nullable datetime, #\"Potential Issue\" = type text, #\"Schedule item\" = type text], {",
+                "    {\"MIG-101\", \"MIG-3212\", \"MIG-101\", \"Task\", \"Inventory legacy report logic\", \"N. Ellis\", \"Done\", null, null, null, null, 13, 9, 12, null, null, #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), \"\", \"MIG-3212 · Inventory legacy report logic\"},",
+                "    {\"MIG-101\", \"MIG-55050\", \"MIG-3212\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"N. Ellis\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3212 / MIG-55050 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-101\", \"MIG-55051\", \"MIG-3212\", \"Subtask\", \"Verify acceptance criteria\", \"N. Ellis\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3212 / MIG-55051 · Verify acceptance criteria\"},",
+                "    {\"MIG-101\", \"MIG-3213\", \"MIG-101\", \"Story\", \"Agree the valuation grain\", \"M. Park\", \"Done\", null, null, null, null, 8, 11, 14, null, null, #datetime(2026,11,11,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,11,0,0,0), #datetime(2026,11,13,0,0,0), \"\", \"MIG-3213 · Agree the valuation grain\"},",
+                "    {\"MIG-101\", \"MIG-55053\", \"MIG-3213\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"M. Park\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3213 / MIG-55053 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-101\", \"MIG-55054\", \"MIG-3213\", \"Subtask\", \"Verify acceptance criteria\", \"M. Park\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3213 / MIG-55054 · Verify acceptance criteria\"},",
+                "    {\"MIG-101\", \"MIG-3214\", \"MIG-101\", \"Story\", \"Build the semantic model\", \"R. Lane\", \"Done\", null, null, null, null, 8, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,13,0,0,0), #datetime(2026,11,18,0,0,0), \"\", \"MIG-3214 · Build the semantic model\"},",
+                "    {\"MIG-101\", \"MIG-55056\", \"MIG-3214\", \"Subtask\", \"Prepare build the semantic model evidence\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3214 / MIG-55056 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-101\", \"MIG-55057\", \"MIG-3214\", \"Subtask\", \"Verify acceptance criteria\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3214 / MIG-55057 · Verify acceptance criteria\"},",
+                "    {\"MIG-101\", \"MIG-3215\", \"MIG-101\", \"Task\", \"Reconcile source and target\", \"A. Chen\", \"In progress\", \"A stale FX rate could overstate client-reported market value.\", null, \"Join closing FX on currency and valuation date.\", \"N. Ellis\", 8, 16, 22, null, 20, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,17,0,0,0), null, \"Client statements may need reissue if sign-off uses the load-date FX rate.\", \"MIG-3215 · Reconcile source and target\"},",
+                "    {\"MIG-101\", \"MIG-55059\", \"MIG-3215\", \"Subtask\", \"Prepare reconcile source and target evidence\", \"A. Chen\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3215 / MIG-55059 · Prepare reconcile source and target evidence\"},",
+                "    {\"MIG-101\", \"MIG-55060\", \"MIG-3215\", \"Subtask\", \"Verify CAD closing rate\", \"A. Chen\", \"Blocked\", \"USD value differs for the CAD position.\", \"FX join uses load date instead of valuation date.\", \"Correct the join, rerun the comparison and request reviewer sign-off.\", \"N. Ellis\", null, null, null, 2, 20, null, null, null, null, \"Client statements may need reissue if sign-off uses the load-date FX rate.\", \"↳ MIG-3215 / MIG-55060 · Verify CAD closing rate\"},",
+                "    {\"MIG-101\", \"MIG-3216\", \"MIG-101\", \"Story\", \"Run business acceptance\", \"S. Reed\", \"To do\", null, null, null, null, 5, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3216 · Run business acceptance\"},",
+                "    {\"MIG-101\", \"MIG-55062\", \"MIG-3216\", \"Subtask\", \"Prepare run business acceptance evidence\", \"S. Reed\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3216 / MIG-55062 · Prepare run business acceptance evidence\"},",
+                "    {\"MIG-101\", \"MIG-55063\", \"MIG-3216\", \"Subtask\", \"Verify acceptance criteria\", \"S. Reed\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3216 / MIG-55063 · Verify acceptance criteria\"},",
+                "    {\"MIG-101\", \"MIG-3217\", \"MIG-101\", \"Story\", \"Authorize production cutover\", \"P. Noor\", \"To do\", null, null, null, null, 3, 22, 28, null, null, #datetime(2026,11,22,0,0,0), #datetime(2026,11,28,0,0,0), null, null, \"\", \"MIG-3217 · Authorize production cutover\"},",
+                "    {\"MIG-101\", \"MIG-55065\", \"MIG-3217\", \"Subtask\", \"Prepare authorize production cutover evidence\", \"P. Noor\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3217 / MIG-55065 · Prepare authorize production cutover evidence\"},",
+                "    {\"MIG-101\", \"MIG-55066\", \"MIG-3217\", \"Subtask\", \"Verify acceptance criteria\", \"P. Noor\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3217 / MIG-55066 · Verify acceptance criteria\"},",
+                "    {\"MIG-102\", \"MIG-3224\", \"MIG-102\", \"Task\", \"Inventory legacy report logic\", \"M. Park\", \"Done\", null, null, null, null, 13, 7, 10, null, null, #datetime(2026,11,7,0,0,0), #datetime(2026,11,10,0,0,0), #datetime(2026,11,7,0,0,0), #datetime(2026,11,9,0,0,0), \"\", \"MIG-3224 · Inventory legacy report logic\"},",
+                "    {\"MIG-102\", \"MIG-55100\", \"MIG-3224\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"M. Park\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3224 / MIG-55100 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-102\", \"MIG-55101\", \"MIG-3224\", \"Subtask\", \"Verify acceptance criteria\", \"M. Park\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3224 / MIG-55101 · Verify acceptance criteria\"},",
+                "    {\"MIG-102\", \"MIG-3225\", \"MIG-102\", \"Story\", \"Agree the valuation grain\", \"R. Lane\", \"Done\", null, null, null, null, 8, 9, 12, null, null, #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), #datetime(2026,11,9,0,0,0), #datetime(2026,11,14,0,0,0), \"\", \"MIG-3225 · Agree the valuation grain\"},",
+                "    {\"MIG-102\", \"MIG-55103\", \"MIG-3225\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3225 / MIG-55103 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-102\", \"MIG-55104\", \"MIG-3225\", \"Subtask\", \"Verify acceptance criteria\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3225 / MIG-55104 · Verify acceptance criteria\"},",
+                "    {\"MIG-102\", \"MIG-3226\", \"MIG-102\", \"Story\", \"Build the semantic model\", \"A. Chen\", \"Done\", null, null, null, null, 5, 11, 14, null, null, #datetime(2026,11,11,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,12,0,0,0), #datetime(2026,11,14,0,0,0), \"\", \"MIG-3226 · Build the semantic model\"},",
+                "    {\"MIG-102\", \"MIG-55106\", \"MIG-3226\", \"Subtask\", \"Prepare build the semantic model evidence\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3226 / MIG-55106 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-102\", \"MIG-55107\", \"MIG-3226\", \"Subtask\", \"Verify acceptance criteria\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3226 / MIG-55107 · Verify acceptance criteria\"},",
+                "    {\"MIG-102\", \"MIG-3227\", \"MIG-102\", \"Task\", \"Reconcile source and target\", \"S. Reed\", \"Done\", null, null, null, null, 5, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), \"\", \"MIG-3227 · Reconcile source and target\"},",
+                "    {\"MIG-102\", \"MIG-55109\", \"MIG-3227\", \"Subtask\", \"Prepare reconcile source and target evidence\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3227 / MIG-55109 · Prepare reconcile source and target evidence\"},",
+                "    {\"MIG-102\", \"MIG-55110\", \"MIG-3227\", \"Subtask\", \"Verify acceptance criteria\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3227 / MIG-55110 · Verify acceptance criteria\"},",
+                "    {\"MIG-102\", \"MIG-3228\", \"MIG-102\", \"Story\", \"Run business acceptance\", \"P. Noor\", \"In progress\", null, null, null, null, 3, 16, 22, null, null, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,16,0,0,0), null, \"\", \"MIG-3228 · Run business acceptance\"},",
+                "    {\"MIG-102\", \"MIG-55112\", \"MIG-3228\", \"Subtask\", \"Prepare run business acceptance evidence\", \"P. Noor\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3228 / MIG-55112 · Prepare run business acceptance evidence\"},",
+                "    {\"MIG-102\", \"MIG-55113\", \"MIG-3228\", \"Subtask\", \"Verify acceptance criteria\", \"P. Noor\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3228 / MIG-55113 · Verify acceptance criteria\"},",
+                "    {\"MIG-102\", \"MIG-3229\", \"MIG-102\", \"Story\", \"Authorize production cutover\", \"G. Silva\", \"To do\", null, null, null, null, 2, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3229 · Authorize production cutover\"},",
+                "    {\"MIG-102\", \"MIG-55115\", \"MIG-3229\", \"Subtask\", \"Prepare authorize production cutover evidence\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3229 / MIG-55115 · Prepare authorize production cutover evidence\"},",
+                "    {\"MIG-102\", \"MIG-55116\", \"MIG-3229\", \"Subtask\", \"Verify acceptance criteria\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3229 / MIG-55116 · Verify acceptance criteria\"},",
+                "    {\"MIG-103\", \"MIG-3236\", \"MIG-103\", \"Task\", \"Inventory legacy report logic\", \"R. Lane\", \"Done\", null, null, null, null, 13, 5, 8, null, null, #datetime(2026,11,5,0,0,0), #datetime(2026,11,8,0,0,0), #datetime(2026,11,5,0,0,0), #datetime(2026,11,10,0,0,0), \"\", \"MIG-3236 · Inventory legacy report logic\"},",
+                "    {\"MIG-103\", \"MIG-55150\", \"MIG-3236\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3236 / MIG-55150 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-103\", \"MIG-55151\", \"MIG-3236\", \"Subtask\", \"Verify acceptance criteria\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3236 / MIG-55151 · Verify acceptance criteria\"},",
+                "    {\"MIG-103\", \"MIG-3237\", \"MIG-103\", \"Story\", \"Agree the valuation grain\", \"A. Chen\", \"Done\", null, null, null, null, 8, 7, 10, null, null, #datetime(2026,11,7,0,0,0), #datetime(2026,11,10,0,0,0), #datetime(2026,11,8,0,0,0), #datetime(2026,11,10,0,0,0), \"\", \"MIG-3237 · Agree the valuation grain\"},",
+                "    {\"MIG-103\", \"MIG-55153\", \"MIG-3237\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3237 / MIG-55153 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-103\", \"MIG-55154\", \"MIG-3237\", \"Subtask\", \"Verify acceptance criteria\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3237 / MIG-55154 · Verify acceptance criteria\"},",
+                "    {\"MIG-103\", \"MIG-3238\", \"MIG-103\", \"Story\", \"Build the semantic model\", \"S. Reed\", \"Done\", null, null, null, null, 5, 9, 12, null, null, #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), \"\", \"MIG-3238 · Build the semantic model\"},",
+                "    {\"MIG-103\", \"MIG-55156\", \"MIG-3238\", \"Subtask\", \"Prepare build the semantic model evidence\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3238 / MIG-55156 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-103\", \"MIG-55157\", \"MIG-3238\", \"Subtask\", \"Verify acceptance criteria\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3238 / MIG-55157 · Verify acceptance criteria\"},",
+                "    {\"MIG-103\", \"MIG-3239\", \"MIG-103\", \"Task\", \"Reconcile source and target\", \"P. Noor\", \"Done\", null, null, null, null, 5, 11, 14, null, null, #datetime(2026,11,11,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,11,0,0,0), #datetime(2026,11,13,0,0,0), \"\", \"MIG-3239 · Reconcile source and target\"},",
+                "    {\"MIG-103\", \"MIG-55159\", \"MIG-3239\", \"Subtask\", \"Prepare reconcile source and target evidence\", \"P. Noor\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3239 / MIG-55159 · Prepare reconcile source and target evidence\"},",
+                "    {\"MIG-103\", \"MIG-55160\", \"MIG-3239\", \"Subtask\", \"Verify acceptance criteria\", \"P. Noor\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3239 / MIG-55160 · Verify acceptance criteria\"},",
+                "    {\"MIG-103\", \"MIG-3240\", \"MIG-103\", \"Story\", \"Run business acceptance\", \"G. Silva\", \"Done\", null, null, null, null, 3, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,13,0,0,0), #datetime(2026,11,18,0,0,0), \"\", \"MIG-3240 · Run business acceptance\"},",
+                "    {\"MIG-103\", \"MIG-55162\", \"MIG-3240\", \"Subtask\", \"Prepare run business acceptance evidence\", \"G. Silva\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3240 / MIG-55162 · Prepare run business acceptance evidence\"},",
+                "    {\"MIG-103\", \"MIG-55163\", \"MIG-3240\", \"Subtask\", \"Verify acceptance criteria\", \"G. Silva\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3240 / MIG-55163 · Verify acceptance criteria\"},",
+                "    {\"MIG-103\", \"MIG-3241\", \"MIG-103\", \"Story\", \"Authorize production cutover\", \"N. Ellis\", \"In progress\", null, null, null, null, 2, 16, 22, null, null, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,16,0,0,0), null, \"\", \"MIG-3241 · Authorize production cutover\"},",
+                "    {\"MIG-103\", \"MIG-55165\", \"MIG-3241\", \"Subtask\", \"Prepare authorize production cutover evidence\", \"N. Ellis\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3241 / MIG-55165 · Prepare authorize production cutover evidence\"},",
+                "    {\"MIG-103\", \"MIG-55166\", \"MIG-3241\", \"Subtask\", \"Verify acceptance criteria\", \"N. Ellis\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3241 / MIG-55166 · Verify acceptance criteria\"},",
+                "    {\"MIG-104\", \"MIG-3248\", \"MIG-104\", \"Task\", \"Inventory legacy report logic\", \"A. Chen\", \"Done\", null, null, null, null, 8, 11, 14, null, null, #datetime(2026,11,11,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,12,0,0,0), #datetime(2026,11,14,0,0,0), \"\", \"MIG-3248 · Inventory legacy report logic\"},",
+                "    {\"MIG-104\", \"MIG-55200\", \"MIG-3248\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3248 / MIG-55200 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-104\", \"MIG-55201\", \"MIG-3248\", \"Subtask\", \"Verify acceptance criteria\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3248 / MIG-55201 · Verify acceptance criteria\"},",
+                "    {\"MIG-104\", \"MIG-3249\", \"MIG-104\", \"Story\", \"Agree the valuation grain\", \"S. Reed\", \"Done\", null, null, null, null, 5, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), \"\", \"MIG-3249 · Agree the valuation grain\"},",
+                "    {\"MIG-104\", \"MIG-55203\", \"MIG-3249\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3249 / MIG-55203 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-104\", \"MIG-55204\", \"MIG-3249\", \"Subtask\", \"Verify acceptance criteria\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3249 / MIG-55204 · Verify acceptance criteria\"},",
+                "    {\"MIG-104\", \"MIG-3250\", \"MIG-104\", \"Story\", \"Build the semantic model\", \"P. Noor\", \"In progress\", null, null, null, null, 13, 16, 22, null, null, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,16,0,0,0), null, \"\", \"MIG-3250 · Build the semantic model\"},",
+                "    {\"MIG-104\", \"MIG-55206\", \"MIG-3250\", \"Subtask\", \"Prepare build the semantic model evidence\", \"P. Noor\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3250 / MIG-55206 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-104\", \"MIG-55207\", \"MIG-3250\", \"Subtask\", \"Verify acceptance criteria\", \"P. Noor\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3250 / MIG-55207 · Verify acceptance criteria\"},",
+                "    {\"MIG-104\", \"MIG-3251\", \"MIG-104\", \"Task\", \"Reconcile source and target\", \"G. Silva\", \"To do\", null, null, null, null, 8, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3251 · Reconcile source and target\"},",
+                "    {\"MIG-104\", \"MIG-55209\", \"MIG-3251\", \"Subtask\", \"Prepare reconcile source and target evidence\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3251 / MIG-55209 · Prepare reconcile source and target evidence\"},",
+                "    {\"MIG-104\", \"MIG-55210\", \"MIG-3251\", \"Subtask\", \"Verify acceptance criteria\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3251 / MIG-55210 · Verify acceptance criteria\"},",
+                "    {\"MIG-104\", \"MIG-3252\", \"MIG-104\", \"Story\", \"Run business acceptance\", \"N. Ellis\", \"To do\", null, null, null, null, 5, 22, 28, null, null, #datetime(2026,11,22,0,0,0), #datetime(2026,11,28,0,0,0), null, null, \"\", \"MIG-3252 · Run business acceptance\"},",
+                "    {\"MIG-104\", \"MIG-55212\", \"MIG-3252\", \"Subtask\", \"Prepare run business acceptance evidence\", \"N. Ellis\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3252 / MIG-55212 · Prepare run business acceptance evidence\"},",
+                "    {\"MIG-104\", \"MIG-55213\", \"MIG-3252\", \"Subtask\", \"Verify acceptance criteria\", \"N. Ellis\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3252 / MIG-55213 · Verify acceptance criteria\"},",
+                "    {\"MIG-105\", \"MIG-3260\", \"MIG-105\", \"Task\", \"Inventory legacy report logic\", \"S. Reed\", \"Done\", null, null, null, null, 3, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), \"\", \"MIG-3260 · Inventory legacy report logic\"},",
+                "    {\"MIG-105\", \"MIG-55250\", \"MIG-3260\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3260 / MIG-55250 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-105\", \"MIG-55251\", \"MIG-3260\", \"Subtask\", \"Verify acceptance criteria\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3260 / MIG-55251 · Verify acceptance criteria\"},",
+                "    {\"MIG-105\", \"MIG-3261\", \"MIG-105\", \"Story\", \"Agree the valuation grain\", \"P. Noor\", \"In progress\", \"The scheduled review may slip if the dependency remains open.\", null, \"Confirm dependency owner and revised review date.\", \"S. Reed\", 8, 16, 22, null, 20, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,17,0,0,0), null, \"If the exception stays open, benchmark mapping may slip past its forecast date.\", \"MIG-3261 · Agree the valuation grain\"},",
+                "    {\"MIG-105\", \"MIG-55253\", \"MIG-3261\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"P. Noor\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3261 / MIG-55253 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-105\", \"MIG-55254\", \"MIG-3261\", \"Subtask\", \"Verify acceptance criteria\", \"P. Noor\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3261 / MIG-55254 · Verify acceptance criteria\"},",
+                "    {\"MIG-105\", \"MIG-3262\", \"MIG-105\", \"Story\", \"Build the semantic model\", \"G. Silva\", \"To do\", null, null, null, null, 5, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3262 · Build the semantic model\"},",
+                "    {\"MIG-105\", \"MIG-55256\", \"MIG-3262\", \"Subtask\", \"Prepare build the semantic model evidence\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3262 / MIG-55256 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-105\", \"MIG-55257\", \"MIG-3262\", \"Subtask\", \"Verify acceptance criteria\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3262 / MIG-55257 · Verify acceptance criteria\"},",
+                "    {\"MIG-105\", \"MIG-3263\", \"MIG-105\", \"Task\", \"Reconcile source and target\", \"N. Ellis\", \"To do\", null, null, null, null, 3, 22, 28, null, null, #datetime(2026,11,22,0,0,0), #datetime(2026,11,28,0,0,0), null, null, \"\", \"MIG-3263 · Reconcile source and target\"},",
+                "    {\"MIG-105\", \"MIG-55259\", \"MIG-3263\", \"Subtask\", \"Prepare reconcile source and target evidence\", \"N. Ellis\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3263 / MIG-55259 · Prepare reconcile source and target evidence\"},",
+                "    {\"MIG-105\", \"MIG-55260\", \"MIG-3263\", \"Subtask\", \"Verify acceptance criteria\", \"N. Ellis\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3263 / MIG-55260 · Verify acceptance criteria\"},",
+                "    {\"MIG-106\", \"MIG-3272\", \"MIG-106\", \"Task\", \"Inventory legacy report logic\", \"P. Noor\", \"Done\", null, null, null, null, 13, 9, 12, null, null, #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), #datetime(2026,11,9,0,0,0), #datetime(2026,11,11,0,0,0), \"\", \"MIG-3272 · Inventory legacy report logic\"},",
+                "    {\"MIG-106\", \"MIG-55300\", \"MIG-3272\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"P. Noor\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3272 / MIG-55300 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-106\", \"MIG-55301\", \"MIG-3272\", \"Subtask\", \"Verify acceptance criteria\", \"P. Noor\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3272 / MIG-55301 · Verify acceptance criteria\"},",
+                "    {\"MIG-106\", \"MIG-3273\", \"MIG-106\", \"Story\", \"Agree the valuation grain\", \"G. Silva\", \"Done\", null, null, null, null, 8, 11, 14, null, null, #datetime(2026,11,11,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,11,0,0,0), #datetime(2026,11,16,0,0,0), \"\", \"MIG-3273 · Agree the valuation grain\"},",
+                "    {\"MIG-106\", \"MIG-55303\", \"MIG-3273\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"G. Silva\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3273 / MIG-55303 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-106\", \"MIG-55304\", \"MIG-3273\", \"Subtask\", \"Verify acceptance criteria\", \"G. Silva\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3273 / MIG-55304 · Verify acceptance criteria\"},",
+                "    {\"MIG-106\", \"MIG-3274\", \"MIG-106\", \"Story\", \"Build the semantic model\", \"N. Ellis\", \"Done\", null, null, null, null, 5, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,16,0,0,0), \"\", \"MIG-3274 · Build the semantic model\"},",
+                "    {\"MIG-106\", \"MIG-55306\", \"MIG-3274\", \"Subtask\", \"Prepare build the semantic model evidence\", \"N. Ellis\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3274 / MIG-55306 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-106\", \"MIG-55307\", \"MIG-3274\", \"Subtask\", \"Verify acceptance criteria\", \"N. Ellis\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3274 / MIG-55307 · Verify acceptance criteria\"},",
+                "    {\"MIG-106\", \"MIG-3275\", \"MIG-106\", \"Task\", \"Reconcile source and target\", \"M. Park\", \"Blocked\", \"Fee accrual comparison lacks an approved source.\", \"Approved fee ledger extract is pending.\", \"Request an approved mandate-level fee extract.\", \"Revenue accounting\", 8, 16, 22, 3, 23, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,16,0,0,0), null, \"If the exception stays open, source extract approval may slip past its forecast date.\", \"MIG-3275 · Reconcile source and target\"},",
+                "    {\"MIG-106\", \"MIG-55309\", \"MIG-3275\", \"Subtask\", \"Prepare reconcile source and target evidence\", \"M. Park\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3275 / MIG-55309 · Prepare reconcile source and target evidence\"},",
+                "    {\"MIG-106\", \"MIG-55310\", \"MIG-3275\", \"Subtask\", \"Verify acceptance criteria\", \"M. Park\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3275 / MIG-55310 · Verify acceptance criteria\"},",
+                "    {\"MIG-106\", \"MIG-3276\", \"MIG-106\", \"Story\", \"Run business acceptance\", \"R. Lane\", \"To do\", null, null, null, null, 5, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3276 · Run business acceptance\"},",
+                "    {\"MIG-106\", \"MIG-55312\", \"MIG-3276\", \"Subtask\", \"Prepare run business acceptance evidence\", \"R. Lane\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3276 / MIG-55312 · Prepare run business acceptance evidence\"},",
+                "    {\"MIG-106\", \"MIG-55313\", \"MIG-3276\", \"Subtask\", \"Verify acceptance criteria\", \"R. Lane\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3276 / MIG-55313 · Verify acceptance criteria\"},",
+                "    {\"MIG-107\", \"MIG-3284\", \"MIG-107\", \"Task\", \"Inventory legacy report logic\", \"G. Silva\", \"In progress\", null, null, null, null, 5, 16, 22, null, null, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,16,0,0,0), null, \"\", \"MIG-3284 · Inventory legacy report logic\"},",
+                "    {\"MIG-107\", \"MIG-55350\", \"MIG-3284\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"G. Silva\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3284 / MIG-55350 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-107\", \"MIG-55351\", \"MIG-3284\", \"Subtask\", \"Verify acceptance criteria\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3284 / MIG-55351 · Verify acceptance criteria\"},",
+                "    {\"MIG-107\", \"MIG-3285\", \"MIG-107\", \"Story\", \"Agree the valuation grain\", \"N. Ellis\", \"To do\", null, null, null, null, 3, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3285 · Agree the valuation grain\"},",
+                "    {\"MIG-107\", \"MIG-55353\", \"MIG-3285\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"N. Ellis\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3285 / MIG-55353 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-107\", \"MIG-55354\", \"MIG-3285\", \"Subtask\", \"Verify acceptance criteria\", \"N. Ellis\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3285 / MIG-55354 · Verify acceptance criteria\"},",
+                "    {\"MIG-108\", \"MIG-3296\", \"MIG-108\", \"Task\", \"Inventory legacy report logic\", \"N. Ellis\", \"Done\", null, null, null, null, 13, 7, 10, null, null, #datetime(2026,11,7,0,0,0), #datetime(2026,11,10,0,0,0), #datetime(2026,11,8,0,0,0), #datetime(2026,11,10,0,0,0), \"\", \"MIG-3296 · Inventory legacy report logic\"},",
+                "    {\"MIG-108\", \"MIG-55400\", \"MIG-3296\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"N. Ellis\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3296 / MIG-55400 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-108\", \"MIG-55401\", \"MIG-3296\", \"Subtask\", \"Verify acceptance criteria\", \"N. Ellis\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3296 / MIG-55401 · Verify acceptance criteria\"},",
+                "    {\"MIG-108\", \"MIG-3297\", \"MIG-108\", \"Story\", \"Agree the valuation grain\", \"M. Park\", \"Done\", null, null, null, null, 8, 9, 12, null, null, #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), \"\", \"MIG-3297 · Agree the valuation grain\"},",
+                "    {\"MIG-108\", \"MIG-55403\", \"MIG-3297\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"M. Park\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3297 / MIG-55403 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-108\", \"MIG-55404\", \"MIG-3297\", \"Subtask\", \"Verify acceptance criteria\", \"M. Park\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3297 / MIG-55404 · Verify acceptance criteria\"},",
+                "    {\"MIG-108\", \"MIG-3298\", \"MIG-108\", \"Story\", \"Build the semantic model\", \"R. Lane\", \"Done\", null, null, null, null, 5, 11, 14, null, null, #datetime(2026,11,11,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,11,0,0,0), #datetime(2026,11,13,0,0,0), \"\", \"MIG-3298 · Build the semantic model\"},",
+                "    {\"MIG-108\", \"MIG-55406\", \"MIG-3298\", \"Subtask\", \"Prepare build the semantic model evidence\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3298 / MIG-55406 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-108\", \"MIG-55407\", \"MIG-3298\", \"Subtask\", \"Verify acceptance criteria\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3298 / MIG-55407 · Verify acceptance criteria\"},",
+                "    {\"MIG-108\", \"MIG-3299\", \"MIG-108\", \"Task\", \"Reconcile source and target\", \"A. Chen\", \"Done\", null, null, null, null, 3, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,13,0,0,0), #datetime(2026,11,18,0,0,0), \"\", \"MIG-3299 · Reconcile source and target\"},",
+                "    {\"MIG-108\", \"MIG-55409\", \"MIG-3299\", \"Subtask\", \"Prepare reconcile source and target evidence\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3299 / MIG-55409 · Prepare reconcile source and target evidence\"},",
+                "    {\"MIG-108\", \"MIG-55410\", \"MIG-3299\", \"Subtask\", \"Verify acceptance criteria\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3299 / MIG-55410 · Verify acceptance criteria\"},",
+                "    {\"MIG-108\", \"MIG-3300\", \"MIG-108\", \"Story\", \"Run business acceptance\", \"S. Reed\", \"In progress\", null, null, null, null, 5, 16, 22, null, null, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,16,0,0,0), null, \"\", \"MIG-3300 · Run business acceptance\"},",
+                "    {\"MIG-108\", \"MIG-55412\", \"MIG-3300\", \"Subtask\", \"Prepare run business acceptance evidence\", \"S. Reed\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3300 / MIG-55412 · Prepare run business acceptance evidence\"},",
+                "    {\"MIG-108\", \"MIG-55413\", \"MIG-3300\", \"Subtask\", \"Verify acceptance criteria\", \"S. Reed\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3300 / MIG-55413 · Verify acceptance criteria\"},",
+                "    {\"MIG-108\", \"MIG-3301\", \"MIG-108\", \"Story\", \"Authorize production cutover\", \"P. Noor\", \"To do\", null, null, null, null, 2, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3301 · Authorize production cutover\"},",
+                "    {\"MIG-108\", \"MIG-55415\", \"MIG-3301\", \"Subtask\", \"Prepare authorize production cutover evidence\", \"P. Noor\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3301 / MIG-55415 · Prepare authorize production cutover evidence\"},",
+                "    {\"MIG-108\", \"MIG-55416\", \"MIG-3301\", \"Subtask\", \"Verify acceptance criteria\", \"P. Noor\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3301 / MIG-55416 · Verify acceptance criteria\"},",
+                "    {\"MIG-109\", \"MIG-3308\", \"MIG-109\", \"Task\", \"Inventory legacy report logic\", \"M. Park\", \"Done\", null, null, null, null, 3, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), \"\", \"MIG-3308 · Inventory legacy report logic\"},",
+                "    {\"MIG-109\", \"MIG-55450\", \"MIG-3308\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"M. Park\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3308 / MIG-55450 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-109\", \"MIG-55451\", \"MIG-3308\", \"Subtask\", \"Verify acceptance criteria\", \"M. Park\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3308 / MIG-55451 · Verify acceptance criteria\"},",
+                "    {\"MIG-109\", \"MIG-3309\", \"MIG-109\", \"Story\", \"Agree the valuation grain\", \"R. Lane\", \"In progress\", null, null, null, null, 8, 16, 22, null, null, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,16,0,0,0), null, \"\", \"MIG-3309 · Agree the valuation grain\"},",
+                "    {\"MIG-109\", \"MIG-55453\", \"MIG-3309\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"R. Lane\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3309 / MIG-55453 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-109\", \"MIG-55454\", \"MIG-3309\", \"Subtask\", \"Verify acceptance criteria\", \"R. Lane\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3309 / MIG-55454 · Verify acceptance criteria\"},",
+                "    {\"MIG-109\", \"MIG-3310\", \"MIG-109\", \"Story\", \"Build the semantic model\", \"A. Chen\", \"To do\", null, null, null, null, 3, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3310 · Build the semantic model\"},",
+                "    {\"MIG-109\", \"MIG-55456\", \"MIG-3310\", \"Subtask\", \"Prepare build the semantic model evidence\", \"A. Chen\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3310 / MIG-55456 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-109\", \"MIG-55457\", \"MIG-3310\", \"Subtask\", \"Verify acceptance criteria\", \"A. Chen\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3310 / MIG-55457 · Verify acceptance criteria\"},",
+                "    {\"MIG-110\", \"MIG-3320\", \"MIG-110\", \"Task\", \"Inventory legacy report logic\", \"R. Lane\", \"Done\", null, null, null, null, 13, 9, 12, null, null, #datetime(2026,11,9,0,0,0), #datetime(2026,11,12,0,0,0), #datetime(2026,11,9,0,0,0), #datetime(2026,11,11,0,0,0), \"\", \"MIG-3320 · Inventory legacy report logic\"},",
+                "    {\"MIG-110\", \"MIG-55500\", \"MIG-3320\", \"Subtask\", \"Prepare inventory legacy report logic evidence\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3320 / MIG-55500 · Prepare inventory legacy report logic evidence\"},",
+                "    {\"MIG-110\", \"MIG-55501\", \"MIG-3320\", \"Subtask\", \"Verify acceptance criteria\", \"R. Lane\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3320 / MIG-55501 · Verify acceptance criteria\"},",
+                "    {\"MIG-110\", \"MIG-3321\", \"MIG-110\", \"Story\", \"Agree the valuation grain\", \"A. Chen\", \"Done\", null, null, null, null, 8, 11, 14, null, null, #datetime(2026,11,11,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,11,0,0,0), #datetime(2026,11,16,0,0,0), \"\", \"MIG-3321 · Agree the valuation grain\"},",
+                "    {\"MIG-110\", \"MIG-55503\", \"MIG-3321\", \"Subtask\", \"Prepare agree the valuation grain evidence\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3321 / MIG-55503 · Prepare agree the valuation grain evidence\"},",
+                "    {\"MIG-110\", \"MIG-55504\", \"MIG-3321\", \"Subtask\", \"Verify acceptance criteria\", \"A. Chen\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3321 / MIG-55504 · Verify acceptance criteria\"},",
+                "    {\"MIG-110\", \"MIG-3322\", \"MIG-110\", \"Story\", \"Build the semantic model\", \"S. Reed\", \"Done\", null, null, null, null, 5, 13, 16, null, null, #datetime(2026,11,13,0,0,0), #datetime(2026,11,16,0,0,0), #datetime(2026,11,14,0,0,0), #datetime(2026,11,16,0,0,0), \"\", \"MIG-3322 · Build the semantic model\"},",
+                "    {\"MIG-110\", \"MIG-55506\", \"MIG-3322\", \"Subtask\", \"Prepare build the semantic model evidence\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3322 / MIG-55506 · Prepare build the semantic model evidence\"},",
+                "    {\"MIG-110\", \"MIG-55507\", \"MIG-3322\", \"Subtask\", \"Verify acceptance criteria\", \"S. Reed\", \"Done\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3322 / MIG-55507 · Verify acceptance criteria\"},",
+                "    {\"MIG-110\", \"MIG-3323\", \"MIG-110\", \"Task\", \"Reconcile source and target\", \"P. Noor\", \"In progress\", null, null, null, null, 5, 16, 22, null, null, #datetime(2026,11,16,0,0,0), #datetime(2026,11,22,0,0,0), #datetime(2026,11,16,0,0,0), null, \"\", \"MIG-3323 · Reconcile source and target\"},",
+                "    {\"MIG-110\", \"MIG-55509\", \"MIG-3323\", \"Subtask\", \"Prepare reconcile source and target evidence\", \"P. Noor\", \"In progress\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3323 / MIG-55509 · Prepare reconcile source and target evidence\"},",
+                "    {\"MIG-110\", \"MIG-55510\", \"MIG-3323\", \"Subtask\", \"Verify acceptance criteria\", \"P. Noor\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3323 / MIG-55510 · Verify acceptance criteria\"},",
+                "    {\"MIG-110\", \"MIG-3324\", \"MIG-110\", \"Story\", \"Run business acceptance\", \"G. Silva\", \"To do\", null, null, null, null, 3, 19, 25, null, null, #datetime(2026,11,19,0,0,0), #datetime(2026,11,25,0,0,0), null, null, \"\", \"MIG-3324 · Run business acceptance\"},",
+                "    {\"MIG-110\", \"MIG-55512\", \"MIG-3324\", \"Subtask\", \"Prepare run business acceptance evidence\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3324 / MIG-55512 · Prepare run business acceptance evidence\"},",
+                "    {\"MIG-110\", \"MIG-55513\", \"MIG-3324\", \"Subtask\", \"Verify acceptance criteria\", \"G. Silva\", \"To do\", null, null, null, null, null, null, null, null, null, null, null, null, null, \"\", \"↳ MIG-3324 / MIG-55513 · Verify acceptance criteria\"}",
+                "  })",
+                "in",
+                "  Source"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "November schedule",
+            "expression": "VAR base = DATE(2026,11,1)\nVAR s = SELECTEDVALUE(Items[Target Start Date])\nVAR e = SELECTEDVALUE(Items[Target End Date])\nVAR a = SELECTEDVALUE(Items[Actual Start Date])\nVAR b = COALESCE(SELECTEDVALUE(Items[Actual End Date]),[Schedule snapshot])\nVAR tone = SUBSTITUTE([Schedule color],\"#\",\"%23\")\nVAR goal = \"<rect x='\" & FORMAT(6*(s-base),\"0\") & \"' y='3' width='\" & FORMAT(6*(e-s+1),\"0\") & \"' height='5' rx='2' fill='%23ACC5D5'/>\"\nVAR elapsed = IF(NOT ISBLANK(a),\"<rect x='\" & FORMAT(6*(a-base),\"0\") & \"' y='11' width='\" & FORMAT(6*(b-a+1),\"0\") & \"' height='5' rx='2' fill='\" & tone & \"'/>\",\"\")\nRETURN IF(ISBLANK(s)||ISBLANK(e),BLANK(),\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='20' viewBox='0 0 180 20'><rect width='180' height='20' fill='%23FBF9F0'/>\" & goal & elapsed & \"<path d='M\" & FORMAT(6*([Schedule snapshot]-base+1),\"0\") & \" 0v20' stroke='%239C5339' stroke-dasharray='2 2'/></svg>\")",
+            "dataCategory": "ImageUrl"
+          },
+          {
+            "name": "Schedule snapshot",
+            "expression": "DATE(2026,11,19)",
+            "formatString": "mmm d, yyyy"
+          },
+          {
+            "name": "Finish variance days",
+            "expression": "VAR t=SELECTEDVALUE(Items[Target End Date]) VAR a=SELECTEDVALUE(Items[Actual End Date]) RETURN IF(HASONEVALUE(Items[Issue Key]) && NOT ISBLANK(t), INT(COALESCE(a,[Schedule snapshot])-t))",
+            "formatString": "0"
+          },
+          {
+            "name": "Schedule label",
+            "expression": "VAR n=[Finish variance days] VAR a=SELECTEDVALUE(Items[Actual End Date])\nRETURN IF(ISBLANK(n),\"No dates\",IF(NOT ISBLANK(a),SWITCH(TRUE(),n>0,n & \"d late\",n<0,ABS(n) & \"d early\",\"On time\"),SWITCH(TRUE(),n>0,n & \"d overdue\",n=0,\"Due today\",ABS(n) & \"d left\")))"
+          },
+          {
+            "name": "Schedule color",
+            "expression": "VAR n=[Finish variance days] VAR a=SELECTEDVALUE(Items[Actual End Date]) RETURN SWITCH(TRUE(),ISBLANK(n),\"#61665C\",n>0,\"#A33230\",NOT ISBLANK(a),\"#1F6F56\",n>=-3,\"#8B5D00\",ISBLANK(SELECTEDVALUE(Items[Actual Start Date])),\"#61665C\",\"#1F6F56\")"
+          },
+          {
+            "name": "Blocker color",
+            "expression": "IF(LEN(SELECTEDVALUE(Items[Open Blocker]))>0,\"#A33230\",\"#373A36\")"
+          }
+        ]
+      },
+      {
+        "name": "Phases",
+        "columns": [
+          {
+            "name": "Stage",
+            "dataType": "string",
+            "sourceColumn": "Stage",
+            "summarizeBy": "none",
+            "sortByColumn": "Sequence"
+          },
+          {
+            "name": "Sequence",
+            "dataType": "int64",
+            "sourceColumn": "Sequence",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Phases",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "  Source = #table(type table [#\"Stage\" = type text, #\"Sequence\" = Int64.Type], {",
+                "    {\"Inventory\", 1},",
+                "    {\"Discover\", 2},",
+                "    {\"Model\", 3},",
+                "    {\"Reconcile\", 4},",
+                "    {\"UAT\", 5},",
+                "    {\"Cutover\", 6}",
+                "  })",
+                "in",
+                "  Source"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "In progress",
+            "expression": "VAR n = SELECTEDVALUE(Phases[Sequence]) RETURN COALESCE(CALCULATE(DISTINCTCOUNT(Portfolio[Jira Key]),Portfolio[Phase Order]=n),0)",
+            "formatString": "0"
+          },
+          {
+            "name": "Completed stage",
+            "expression": "VAR n = SELECTEDVALUE(Phases[Sequence]) RETURN COALESCE(CALCULATE(DISTINCTCOUNT(Portfolio[Jira Key]),Portfolio[Phase Order]>n),0)",
+            "formatString": "0"
+          }
+        ]
+      },
+      {
+        "name": "Valuation Test",
+        "columns": [
+          {
+            "name": "Epic Key",
+            "dataType": "string",
+            "sourceColumn": "Epic Key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Position",
+            "dataType": "string",
+            "sourceColumn": "Position",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Local Value",
+            "dataType": "int64",
+            "sourceColumn": "Local Value",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Closing FX cents",
+            "dataType": "int64",
+            "sourceColumn": "Closing FX cents",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Load FX cents",
+            "dataType": "int64",
+            "sourceColumn": "Load FX cents",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Valuation Test",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "  Source = #table(type table [#\"Epic Key\" = type text, #\"Position\" = type text, #\"Local Value\" = Int64.Type, #\"Closing FX cents\" = Int64.Type, #\"Load FX cents\" = Int64.Type], {",
+                "    {\"MIG-101\", \"USD book A\", 10000000, 100, 100},",
+                "    {\"MIG-101\", \"USD book B\", 1810000, 100, 100},",
+                "    {\"MIG-101\", \"CAD position\", 920000, 75, 77}",
+                "  })",
+                "in",
+                "  Source"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Legacy USD",
+            "expression": "SUMX('Valuation Test','Valuation Test'[Local Value]*'Valuation Test'[Closing FX cents]/100)",
+            "formatString": "$#,##0"
+          },
+          {
+            "name": "Original target USD",
+            "expression": "SUMX('Valuation Test','Valuation Test'[Local Value]*'Valuation Test'[Load FX cents]/100)",
+            "formatString": "$#,##0"
+          },
+          {
+            "name": "FX variance USD",
+            "expression": "[Original target USD]-[Legacy USD]",
+            "formatString": "$#,##0"
+          },
+          {
+            "name": "Retest USD",
+            "expression": "SUMX('Valuation Test','Valuation Test'[Local Value]*'Valuation Test'[Closing FX cents]/100)",
+            "formatString": "$#,##0"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "10af4151-99ac-5f17-a501-45d15f8a2c9e",
+        "fromTable": "Items",
+        "fromColumn": "Epic Key",
+        "toTable": "Portfolio",
+        "toColumn": "Jira Key"
+      },
+      {
+        "name": "a0791bbd-e3fa-5453-bb55-9fc10aa70dcb",
+        "fromTable": "Valuation Test",
+        "fromColumn": "Epic Key",
+        "toTable": "Portfolio",
+        "toColumn": "Jira Key"
+      }
+    ]
+  }
+}
